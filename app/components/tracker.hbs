@@ -1,0 +1,14 @@
+<div class={{bem this.block
+  modifiers=(hash
+    debug=@debug
+  )}}
+  ...attributes
+>
+  <video
+    width="320"
+    height="240"
+    autoplay
+    {{did-insert (action this.renderCameraImage)}}
+  ></video>
+  <canvas {{did-insert (action this.renderCanvas)}}></canvas>
+</div>
