@@ -1,6 +1,13 @@
+// Tracker
 .c-tracker {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 10;
+  display: none;
+
+  &--is-debug {
+    display: block;
+  }
+}
 }

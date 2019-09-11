@@ -1,6 +1,6 @@
 <div class={{bem this.block
   modifiers=(hash
-    debug=@debug
+    debug=this.debug.enabled
   )}}
   ...attributes
 >
@@ -11,4 +11,8 @@
     {{did-insert (action this.renderCameraImage)}}
   ></video>
   <canvas {{did-insert (action this.renderCanvas)}}></canvas>
+  <div class={{bem this.block "settings"}}>
+    <Input type="number" @value={{this.contrast}} />
+    <Input type="number" @value={{this.grayscale}} />
+  </div>
 </div>

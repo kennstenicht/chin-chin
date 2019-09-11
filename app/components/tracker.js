@@ -1,16 +1,28 @@
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
 import { AR } from 'js-aruco';
 
 export default class TrackerComponent extends Component {
+  // Services
+  @service debug;
+
+
+  // Defaults
   block = 'c-tracker';
   video = null;
+  @tracked contrast = 2000;
+  @tracked grayscale = 100;
 
+  // Hooks
   constructor() {
     super(...arguments);
 
     this.detector = new AR.Detector();
   }
 
+
+  // Functions
   renderCameraImage(video) {
     video.style.display = "none";
 
@@ -27,7 +39,6 @@ export default class TrackerComponent extends Component {
   }
 
   renderCanvas(canvas) {
-    canvas.style.display = this.args.debug ? "block" : "none";
     canvas.width = this.video.width;
     canvas.height = this.video.height;
 
@@ -40,7 +51,7 @@ export default class TrackerComponent extends Component {
     let imageData = this._snapshot();
     let markers = this.detector.detect(imageData);
 
-    if(markers.length && this.args.debug ) {
+    if(markers.length ) {
       this._drawCorners(markers);
     }
 
@@ -51,7 +62,7 @@ export default class TrackerComponent extends Component {
 
   _snapshot() {
     // Draw current webcame frame
-    this.context.filter = 'contrast(2000%) grayscale(100%)';
+    this.context.filter = `contrast(${this.contrast}%) grayscale(${this.grayscale}%)`;
     this.context.drawImage(
       this.video,
       0,
