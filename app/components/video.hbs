@@ -1,0 +1,16 @@
+<video
+  poster={{@poster}}
+  class={{bem this.block
+    modifiers=(hash
+      playing=this.isPlaying
+    )
+  }}
+  ...attributes
+  {{did-insert this.setVideoElement}}
+  {{on "playing" (fn (mut this.isPlaying) true)}}
+  {{on "pause" (fn (mut this.isPlaying) false)}}
+  {{on "ended" this.ended}}
+>
+  <source src={{@src}} type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>

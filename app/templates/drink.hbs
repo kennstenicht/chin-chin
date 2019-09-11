@@ -1,0 +1,16 @@
+{{#let "c-page" as |block|}}
+  <div class={{bem block}}>
+    {{#if this.debug.enabled}}
+      <div class={{bem block "name"}}>
+        <h1>{{this.model.name}}</h1>
+      </div>
+    {{/if}}
+    <div class={{bem block "video"}}>
+      <Video
+        @src={{this.model.video}}
+        @hasStopped={{route-action "videoHasStopped"}}
+        autoplay={{true}}
+      />
+    </div>
+  </div>
+{{/let}}

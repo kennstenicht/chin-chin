@@ -1,0 +1,16 @@
+{{#let "c-page" as |block|}}
+  <div class={{bem block}}>
+    {{#if this.debug.enabled}}
+      <div class={{bem block "name"}}>
+        <h1>Waiting...</h1>
+      </div>
+    {{/if}}
+    <div class={{bem block "video"}}>
+      <Video
+        @src="/assets/videos/waiting.mov"
+        autoplay={{true}}
+        loop={{true}}
+      />
+    </div>
+  </div>
+{{/let}}
