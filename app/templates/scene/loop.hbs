@@ -1,0 +1,25 @@
+{{#let "c-page" as |block|}}
+  <div class={{bem block}}>
+    {{#if this.debug.infoEnabled}}
+      <div class={{bem block "name"}}>
+        <h1>{{this.model.name}}</h1>
+        <button {{on "click" (route-action "transitionToDrink" 9)}}>
+          Drink Berliner Luft
+        </button>
+        <button {{on "click" (route-action "transitionToDrink" 6)}}>
+          Drink Vodka
+        </button>
+        <button {{on "click" (route-action "transitionToDrink" 3)}}>
+          Drink Jägermeister
+        </button>
+      </div>
+    {{/if}}
+    <div class={{bem block "video"}}>
+      <Video
+        @src={{this.model.loop}}
+        autoplay={{true}}
+        loop={{true}}
+      />
+    </div>
+  </div>
+{{/let}}

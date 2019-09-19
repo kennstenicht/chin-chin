@@ -7,6 +7,12 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
-  this.route('drink', { path: 'drink/:id'});
-  this.route('waiting', { path: '/'});
+  this.route('scene', { path: 'scenes/:scene_id' }, function() {
+    this.route('intro');
+    this.route('loop');
+    this.route('drink', { path: 'drinks/:drink_id' }, function() {
+      this.route('intro');
+      this.route('ex');
+    });
+  });
 });

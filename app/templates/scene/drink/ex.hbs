@@ -1,0 +1,19 @@
+{{#let "c-page" as |block|}}
+  <div class={{bem block}}>
+    {{#if this.debug.infoEnabled}}
+      <div class={{bem block "name"}}>
+        <h1>{{this.model.name}}</h1>
+        <button {{on "click" (route-action "transitionToRandomScene")}}>
+          Skip to end
+        </button>
+      </div>
+    {{/if}}
+    <div class={{bem block "video"}}>
+      <Video
+        @src={{this.model.ex}}
+        @hasStopped={{route-action "transitionToRandomScene"}}
+        autoplay={{true}}
+      />
+    </div>
+  </div>
+{{/let}}

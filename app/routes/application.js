@@ -1,10 +1,15 @@
 import Route from '@ember/routing/route';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class ApplicationRoute extends Route {
+  // Service
+  @service router;
+
+
   // Defaults
   videoIsPlaying = false;
-  removeAfterFrames = 100;
+  removeAfterFrames = 10;
   markers = [];
 
 
@@ -31,9 +36,14 @@ export default class ApplicationRoute extends Route {
 
         if(!markerStillExists) {
           if(marker.removeIn == 0) {
+            // Remove marker from aktive markers
             markers.splice(index, 1);
+
+            // Set videoIsPlaying to true
             this.videoIsPlaying = true;
-            this.transitionTo('drink', marker.id);
+
+            // Transition to drink
+            this.transitionToDrink(marker.id)
           } else {
             marker.removeIn--;
           }
@@ -43,8 +53,47 @@ export default class ApplicationRoute extends Route {
   }
 
   @action
-  videoHasStopped() {
+  transitionToDrink(markerId) {
+    const scene = this.modelFor(this.router.currentRouteName);
+
+    scene.drinks.then((drinks) => {
+      let mapMarkerToDrink = {
+        6: "Vodka",
+        9: "Berliner Luft",
+        3: "Jägermeister"
+      }
+      let drink = drinks.findBy('name', mapMarkerToDrink[markerId]);
+
+      if(drink.intro) {
+        this.transitionTo('scene.drink.intro', drink);
+      } else {
+        this.transitionTo('scene.drink.ex', drink);
+      }
+    });
+  }
+
+  @action
+  transitionToRandomScene() {
+    // Video is finised; New marker updates are allowed
     this.videoIsPlaying = false;
-    this.transitionTo('waiting');
+
+    // Transition to new random scene of current state
+    let scenes = this._getScenes();
+
+    scenes.then((scenes) => {
+      const randomScene = Math.floor(Math.random() * scenes.length);
+      const scene = scenes.objectAt(randomScene);
+      console.log(scene);
+      if(scene.intro) {
+        this.transitionTo('scene.intro', scene);
+      } else {
+        this.transitionTo('scene.loop', scene);
+      }
+    });
+  }
+
+  _getScenes() {
+    // TODO: Add state depending on time
+    return this.store.findAll('scene');
   }
 }
