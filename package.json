@@ -31,6 +31,7 @@
     "ember-cli-htmlbars": "github:ember-cli/ember-cli-htmlbars#b9295c5b39c3f89ca32c231c24dcd4811db71e5b",
     "ember-cli-htmlbars-inline-precompile": "^2.1.0",
     "ember-cli-inject-live-reload": "^2.0.1",
+    "ember-cli-inuitcss": "^1.0.2",
     "ember-cli-mirage": "1.0.0",
     "ember-cli-sass": "^10.0.1",
     "ember-cli-sri": "^2.1.1",
@@ -49,6 +50,7 @@
     "eslint": "^6.1.0",
     "eslint-plugin-ember": "^6.2.0",
     "eslint-plugin-node": "^9.0.1",
+    "inuitcss": "^6.0.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.9.0",
     "sass": "^1.23.0-module.beta.1"
