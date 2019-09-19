@@ -13,6 +13,12 @@ export default class ApplicationRoute extends Route {
   markers = [];
 
 
+  // Hooks
+  afterModel() {
+    return this.transitionToRandomScene();
+  }
+
+
   // Actions
   @action
   updateMarkers(newMarkers) {
@@ -83,7 +89,7 @@ export default class ApplicationRoute extends Route {
     scenes.then((scenes) => {
       const randomScene = Math.floor(Math.random() * scenes.length);
       const scene = scenes.objectAt(randomScene);
-      console.log(scene);
+
       if(scene.intro) {
         this.transitionTo('scene.intro', scene);
       } else {
@@ -93,7 +99,6 @@ export default class ApplicationRoute extends Route {
   }
 
   _getScenes() {
-    // TODO: Add state depending on time
     return this.store.findAll('scene');
   }
 }
