@@ -2,7 +2,8 @@ import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class DebugService extends Service {
-  @tracked enabled = true;
+  @tracked infoEnabled = true;
+  @tracked videoEnabled = false;
 
   constructor() {
     super(...arguments);
@@ -11,8 +12,11 @@ export default class DebugService extends Service {
   }
 
   _enableDebug(e) {
-    if(e.key == 'd') {
-      this.enabled = !this.enabled;
+    if(e.key == 'i') {
+      this.infoEnabled = !this.infoEnabled;
+    }
+    if(e.key == 'v') {
+      this.videoEnabled = !this.videoEnabled;
     }
   }
 }
