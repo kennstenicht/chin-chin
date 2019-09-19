@@ -5,8 +5,8 @@
   ...attributes
 >
   <video
-    width="320"
-    height="240"
+    width="720"
+    height="480"
     autoplay
     {{did-insert (action this.renderCameraImage)}}
   ></video>
@@ -14,5 +14,6 @@
   <div class={{bem this.block "settings"}}>
     <Input type="number" @value={{this.contrast}} />
     <Input type="number" @value={{this.grayscale}} />
+    <Input type="number" @value={{this.brightness}} />
   </div>
 </div>

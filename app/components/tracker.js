@@ -11,8 +11,9 @@ export default class TrackerComponent extends Component {
   // Defaults
   block = 'c-tracker';
   video = null;
-  @tracked contrast = 2000;
+  @tracked contrast = 200;
   @tracked grayscale = 100;
+  @tracked brightness = 100;
 
   // Hooks
   constructor() {
@@ -26,6 +27,8 @@ export default class TrackerComponent extends Component {
   renderCameraImage(video) {
     video.style.display = "none";
 
+    // Select video source
+    // https://webrtc.github.io/samples/src/content/devices/input-output/
     if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
         .getUserMedia({ video: true })
@@ -62,7 +65,11 @@ export default class TrackerComponent extends Component {
 
   _snapshot() {
     // Draw current webcame frame
-    this.context.filter = `contrast(${this.contrast}%) grayscale(${this.grayscale}%)`;
+    this.context.filter = `
+      contrast(${this.contrast}%)
+      grayscale(${this.grayscale}%)
+      brightness(${this.brightness}%)
+    `;
     this.context.drawImage(
       this.video,
       0,
