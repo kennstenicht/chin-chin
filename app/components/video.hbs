@@ -3,6 +3,7 @@
   class={{bem this.block
     modifiers=(hash
       is-playing=this.isPlaying
+      has-effect=this.debug.effectEnabled
     )
   }}
   ...attributes
@@ -14,3 +15,7 @@
   <source src={{@src}} type="video/x-m4v">
   Your browser does not support HTML5 video.
 </video>
+
+{{#if this.debug.effectEnabled}}
+  <div class="c-video-effect"></div>
+{{/if}}

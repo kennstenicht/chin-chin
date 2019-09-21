@@ -2,20 +2,6 @@
 //   #VIDEO PAGE
 //   ======================================================================== */
 
-// Variables
-$screen-background: #333;
-
-// Aniamtions
-@keyframes flicker {
-  $steps: 20;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      opacity: random();
-    }
-  }
-}
-
-// Component class
 .c-video-page {
   &__name {
     position: fixed;
@@ -30,40 +16,5 @@ $screen-background: #333;
   &__video {
     width: 100vw;
     height: 100vh;
-
-    // Flickering
-    &:after {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 2;
-      display: block;
-      visibility: visible;
-      opacity: 1;
-      background: transparentize($screen-background,0.9);
-      content: ' ';
-      transition: opacity 6s ease-in-out;
-      // animation: flicker 0.5s infinite;
-      pointer-events: none;
-    }
-
-    &:before {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 2;
-      display: block;
-      visibility: visible;
-      opacity: 1;
-      background: linear-gradient(transparentize($screen-background,1) 50%, transparentize(darken($screen-background,10),0.75) 50%), linear-gradient(90deg,transparentize(#ff0000,0.94),transparentize(#00ff00,0.98),transparentize(#0000ff,0.94));
-      background-size: 100% 2px, 3px 100%;
-      content: ' ';
-      transition: opacity 1s ease-in-out;
-      pointer-events: none;
-    }
   }
 }
