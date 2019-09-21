@@ -6,6 +6,9 @@ export default class DebugService extends Service {
   @tracked infoEnabled = true;
   @tracked videoEnabled = false;
   @tracked effectEnabled = true;
+  @tracked countEnabled = true;
+  @tracked drinkCount = 0;
+
 
   // Hooks
   constructor() {
@@ -25,6 +28,9 @@ export default class DebugService extends Service {
     }
     if(e.key == 'e') {
       this.effectEnabled = !this.effectEnabled;
+    }
+    if(e.key == 'c') {
+      this.countEnabled = !this.countEnabled;
     }
   }
 }

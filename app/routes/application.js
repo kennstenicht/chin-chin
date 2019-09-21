@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default class ApplicationRoute extends Route {
   // Service
   @service router;
+  @service debug;
 
 
   // Defaults
@@ -75,6 +76,8 @@ export default class ApplicationRoute extends Route {
       } else {
         this.transitionTo('scene.drink.ex', drink);
       }
+
+      this.debug.drinkCount++;
     });
   }
 

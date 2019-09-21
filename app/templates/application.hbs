@@ -1,3 +1,9 @@
 <Tracker @updateMarkers={{route-action "updateMarkers"}}/>
 
 {{outlet}}
+
+{{#if this.debug.countEnabled}}
+  <div class="c-drink-count">
+    {{this.debug.drinkCount}}
+  </div>
+{{/if}}
