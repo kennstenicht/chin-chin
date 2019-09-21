@@ -15,8 +15,9 @@ export function bem(params, { modifiers }) {
       let modifier = modifiers[key];
 
       if(typeof modifier === 'boolean') {
-        let type = modifier ? 'is' : 'is-not';
-        classes.push(`${baseClass}--${type}-${key}`);
+        if(modifier) {
+          classes.push(`${baseClass}--${key}`);
+        }
       } else if(isArray(modifier)) {
         modifier.forEach((modifier) => {
           classes.push(`${baseClass}--${key}-${modifier}`);
