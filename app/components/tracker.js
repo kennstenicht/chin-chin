@@ -11,7 +11,7 @@ export default class TrackerComponent extends Component {
   // Defaults
   block = 'c-tracker';
   video = null;
-  @tracked contrast = 200;
+  @tracked contrast = 2000;
   @tracked grayscale = 100;
   @tracked brightness = 100;
 
