@@ -1,0 +1,20 @@
+/* ==========================================================================
+  #NOTIFICATION
+  ========================================================================== */
+
+.c-notification {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  transition: all 0.3s ease-in-out;
+
+  @include inuit-font-size(30px);
+
+  &--type-warning {
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+  }
+
+  &--is-exiting {
+    opacity: 0;
+  }
+}

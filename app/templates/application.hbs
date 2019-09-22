@@ -1,9 +1,22 @@
-<Tracker @updateMarkers={{route-action "updateMarkers"}}/>
+{{#let "c-application" as |block|}}
+  <div class={{bem block}}>
+    <div class={{bem block "tracker"}}>
+      <Tracker @updateMarkers={{route-action "updateMarkers"}}/>
+    </div>
 
-{{outlet}}
+    {{outlet}}
 
-{{#if this.debug.countEnabled}}
-  <div class="c-drink-count">
-    {{this.debug.drinkCount}}
+    {{#if this.debug.countEnabled}}
+      <div class={{bem block "drink-count"}}>
+        {{this.debug.drinkCount}}
+      </div>
+    {{/if}}
+
+    <div class={{bem block "notifications"}}>
+      {{#each this.flashMessages.queue as |flash|}}
+        <Notification @flash={{flash}} />
+      {{/each}}
+    </div>
   </div>
-{{/if}}
+{{/let}}
+

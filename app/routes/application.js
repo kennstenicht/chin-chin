@@ -6,7 +6,7 @@ export default class ApplicationRoute extends Route {
   // Service
   @service router;
   @service debug;
-
+  @service flashMessages;
 
   // Defaults
   videoIsPlaying = false;
@@ -23,62 +23,66 @@ export default class ApplicationRoute extends Route {
   // Actions
   @action
   updateMarkers(newMarkers) {
-    if(!this.videoIsPlaying) {
-      newMarkers.forEach((newMarker) => {
-        const newMarkerAlreadyExists = this.markers.find((marker) => {
-          return newMarker.id == marker.id;
-        });
-
-        newMarker.removeIn = this.removeAfterFrames;
-
-        if(!newMarkerAlreadyExists) {
-          this.markers.push(newMarker);
-        }
+    newMarkers.forEach((newMarker) => {
+      const newMarkerAlreadyExists = this.markers.find((marker) => {
+        return newMarker.id == marker.id;
       });
 
-      this.markers.forEach((marker, index, markers) => {
-        const markerStillExists = newMarkers.find((newMarker) => {
-          return newMarker.id == marker.id;
-        });
+      newMarker.removeIn = this.removeAfterFrames;
 
-        if(!markerStillExists) {
-          if(marker.removeIn == 0) {
-            // Remove marker from aktive markers
-            markers.splice(index, 1);
+      if(!newMarkerAlreadyExists) {
+        this.markers.push(newMarker);
+      }
+    });
 
-            // Set videoIsPlaying to true
-            this.videoIsPlaying = true;
-
-            // Transition to drink
-            this.transitionToDrink(marker.id)
-          } else {
-            marker.removeIn--;
-          }
-        }
+    this.markers.forEach((marker, index, markers) => {
+      const markerStillExists = newMarkers.find((newMarker) => {
+        return newMarker.id == marker.id;
       });
-    }
+
+      if(!markerStillExists) {
+        if(marker.removeIn == 0) {
+          // Remove marker from aktive markers
+          markers.splice(index, 1);
+
+          // Transition to drink
+          this.transitionToDrink(marker.id);
+        } else {
+          marker.removeIn--;
+        }
+      }
+    });
   }
 
   @action
   transitionToDrink(markerId) {
-    const scene = this.modelFor(this.router.currentRouteName);
+    if(this.videoIsPlaying) {
+      // If one video is playing show message
+      this.flashMessages.warning('Ein Drink nach dem anderen!');
+    } else {
+      const scene = this.modelFor('scene');
 
-    scene.drinks.then((drinks) => {
-      let mapMarkerToDrink = {
-        6: "Vodka",
-        9: "Berliner Luft",
-        3: "Jägermeister"
-      }
-      let drink = drinks.findBy('name', mapMarkerToDrink[markerId]);
+      scene.drinks.then((drinks) => {
+        let mapMarkerToDrink = {
+          0: "Vodka",
+          6: "Berliner Luft",
+          9: "Jägermeister"
+        }
+        let drink = drinks.findBy('name', mapMarkerToDrink[markerId]);
 
-      if(drink.intro) {
-        this.transitionTo('scene.drink.intro', drink);
-      } else {
-        this.transitionTo('scene.drink.ex', drink);
-      }
+        if(drink.intro) {
+          this.transitionTo('scene.drink.intro', drink);
+        } else {
+          this.transitionTo('scene.drink.ex', drink);
+        }
 
-      this.debug.drinkCount++;
-    });
+        // Set videoIsPlaying to true
+        this.videoIsPlaying = true;
+
+        // Increase drink Count
+        this.debug.drinkCount++;
+      });
+    }
   }
 
   @action
