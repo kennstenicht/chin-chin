@@ -7,6 +7,7 @@ export default class ApplicationRoute extends Route {
   @service router;
   @service debug;
   @service flashMessages;
+  @service videos;
 
   // Defaults
   videoIsPlaying = false;
@@ -16,7 +17,26 @@ export default class ApplicationRoute extends Route {
 
   // Hooks
   afterModel() {
-    return this.transitionToRandomScene();
+    // Preload videos
+    return this.store
+      .findAll('scene')
+      .then((scenes) => {
+        scenes.forEach((scene) => {
+          if (scene.intro) this.videos.loadSrc(scene.intro);
+          if (scene.loop) this.videos.loadSrc(scene.loop);
+        });
+
+        return this.store
+          .findAll('drink')
+          .then((drinks) => {
+            drinks.forEach((drink) => {
+              if (drink.intro) this.videos.loadSrc(drink.intro);
+              if (drink.ex) this.videos.loadSrc(drink.ex);
+            });
+
+            return this.transitionToRandomScene();
+          });
+      });
   }
 
 
