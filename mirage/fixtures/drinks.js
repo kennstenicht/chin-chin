@@ -3,29 +3,29 @@ export default [
   {
     id: 1,
     name: 'Vodka',
-    ex: '/assets/videos/drinks/general-1/vodka.mov'
+    ex: '/assets/videos/drinks/general-1/vodka.m4v'
   }, {
     id: 2,
     name: 'Jägermeister',
-    ex: '/assets/videos/drinks/general-1/jaegermeister.mov'
+    ex: '/assets/videos/drinks/general-1/jaegermeister.m4v'
   }, {
     id: 3,
     name: 'Berliner Luft',
-    ex: '/assets/videos/drinks/general-1/berliner-luft.mov'
+    ex: '/assets/videos/drinks/general-1/berliner-luft.m4v'
   },
   // General 2
   {
     id: 4,
     name: 'Vodka',
-    ex: '/assets/videos/drinks/general-2/vodka.mov'
+    ex: '/assets/videos/drinks/general-2/vodka.m4v'
   }, {
     id: 5,
     name: 'Jägermeister',
-    ex: '/assets/videos/drinks/general-2/jaegermeister.mov'
+    ex: '/assets/videos/drinks/general-2/jaegermeister.m4v'
   }, {
     id: 6,
     name: 'Berliner Luft',
-    ex: '/assets/videos/drinks/general-2/berliner-luft.mov'
+    ex: '/assets/videos/drinks/general-2/berliner-luft.m4v'
   },
   // Sleeping
   {
