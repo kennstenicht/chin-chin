@@ -33,8 +33,6 @@ export default class ApplicationRoute extends Route {
               if (drink.intro) this.videos.loadSrc(drink.intro);
               if (drink.ex) this.videos.loadSrc(drink.ex);
             });
-
-            return this.transitionToRandomScene();
           });
       });
   }

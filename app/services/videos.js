@@ -30,7 +30,7 @@ export default class VideosService extends Service {
     req.open('GET', srcPath, true);
     req.responseType = 'arraybuffer';
     req.onload = function() {
-      if (this.status === 200) {
+      if (this.status === 200 && !videos[srcPath]) {
         console.log(`Cache: Create for ${srcPath}`);
         let objectURL = URL.createObjectURL(new Blob([this.response]));
          videos[srcPath] = objectURL;

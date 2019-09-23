@@ -1,0 +1,7 @@
+{{#each this.model as |scene|}}
+  {{#if scene.intro}}
+    <LinkTo @route="scene.intro" @model={{scene}}>{{scene.name}}</LinkTo><br>
+  {{else}}
+    <LinkTo @route="scene.loop" @model={{scene}}>{{scene.name}}</LinkTo><br>
+  {{/if}}
+{{/each}}
