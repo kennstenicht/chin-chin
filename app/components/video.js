@@ -7,10 +7,11 @@ export default class VideoComponent extends Component {
   // Services
   @service media;
   @service debug;
+  @service videos;
 
 
   // Defaults
-  block = "c-video"
+  block = "c-video";
   videoElement = null;
   @tracked isPlaying = false;
 
@@ -19,6 +20,7 @@ export default class VideoComponent extends Component {
   @action
   setVideoElement(element) {
     this.videoElement = element;
+    this.videos.setSrc(this.args.src, (src) => element.src = src);
   }
 
   @action
